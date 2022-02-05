@@ -8,6 +8,9 @@ const imgCartas = [
   "unicornparrot",
 ];
 
+let intervalo;
+let contador = 0;
+
 let numCartas;
 
 function perguntarNumCartas() {
@@ -25,6 +28,13 @@ function perguntarNumCartas() {
 }
 
 perguntarNumCartas();
+
+// Contador de segundos
+function contarSegundos() {
+  const contadorDeSegundos = document.querySelector(".contador-de-segundos");
+  contadorDeSegundos.innerHTML = contador;
+  contador++;
+}
 
 function distribuirCartas() {
   imgCartas.sort(comparador);
@@ -60,6 +70,8 @@ function distribuirCartas() {
   for (let indice in cartas) {
     mesa.innerHTML += cartas[indice];
   }
+
+  intervalo = setInterval(contarSegundos, 1000);
 }
 
 let numJogadas = 0;
@@ -94,7 +106,16 @@ function compararCartas() {
 
 function finalizarJogo() {
   let qntCartasViradas = document.querySelectorAll(".flip");
+  let segundos = 0;
+
   if (qntCartasViradas.length == numCartas) {
-    alert(`Parabéns! Você ganhou em ${numJogadas} jogadas!`);
+    clearInterval(intervalo);
+    segundos = document.querySelector(".contador-de-segundos").innerHTML;
+  }
+
+  if (qntCartasViradas.length == numCartas && segundos != 0) {
+    alert(
+      `Parabéns! Você ganhou em ${numJogadas} jogadas e ${segundos} segundos!`
+    );
   }
 }
