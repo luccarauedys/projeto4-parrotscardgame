@@ -8,6 +8,7 @@ const imgCartas = [
   "unicornparrot",
 ];
 
+const mesa = document.querySelector(".board");
 let intervalo;
 let contador = 0;
 
@@ -39,7 +40,6 @@ function contarSegundos() {
 function distribuirCartas() {
   imgCartas.sort(comparador);
 
-  const mesa = document.querySelector(".board");
   let cartas = [];
 
   for (let i = 0; i < numCartas / 2; i++) {
@@ -104,6 +104,12 @@ function compararCartas() {
   finalizarJogo();
 }
 
+function limparJogo() {
+  mesa.innerHTML = "";
+  contador = 0;
+}
+
+let jogarNovamente;
 function finalizarJogo() {
   let qntCartasViradas = document.querySelectorAll(".flip");
   let segundos = 0;
@@ -117,5 +123,12 @@ function finalizarJogo() {
     alert(
       `Parabéns! Você ganhou em ${numJogadas} jogadas e ${segundos} segundos!`
     );
+
+    jogarNovamente = prompt("Deseja jogar novamente? (sim/nao)");
+
+    if (jogarNovamente == "sim") {
+      limparJogo();
+      perguntarNumCartas();
+    }
   }
 }
