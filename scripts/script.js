@@ -33,22 +33,22 @@ function distribuirCartas() {
   let cartas = [];
 
   for (let i = 0; i < numCartas / 2; i++) {
-    cartas.push(`<div class="card" onclick="virarCarta(this)">
-    <div class="front-face face">
+    cartas.push(`<div class="card" onclick="virarCarta(this)" data-identifier="card">
+    <div class="front-face face" data-identifier="front-face">
        <img src="./img/${imgCartas[i]}.gif">
     </div>
-    <div class="back-face face">
+    <div class="back-face face" data-identifier="back-face">
        <img class="icon" src="./img/icon.png">
     </div>
  </div>`);
-    cartas.push(`<div class="card" onclick="virarCarta(this)">
-    <div class="front-face face">
-       <img src="./img/${imgCartas[i]}.gif">
-    </div>
-    <div class="back-face face">
-       <img class="icon" src="./img/icon.png">
-    </div>
- </div>`);
+    cartas.push(`<div class="card" onclick="virarCarta(this)" data-identifier="card">
+  <div class="front-face face" data-identifier="front-face">
+      <img src="./img/${imgCartas[i]}.gif">
+  </div>
+  <div class="back-face face" data-identifier="back-face">
+      <img class="icon" src="./img/icon.png">
+  </div>
+  </div>`);
   }
 
   cartas.sort(comparador);
