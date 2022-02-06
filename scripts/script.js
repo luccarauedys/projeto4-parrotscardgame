@@ -21,12 +21,10 @@ function perguntarNumCartas() {
   } while (numCartas % 2 != 0 || numCartas < 4 || numCartas > 14);
 
   distribuirCartas();
-  intervalo = setInterval(contarSegundos, 1000);
 }
 
 perguntarNumCartas();
 
-// Contador de segundos
 function contarSegundos() {
   const contadorDeSegundos = document.querySelector(".contador-de-segundos");
   contadorDeSegundos.innerHTML = contador;
@@ -34,8 +32,6 @@ function contarSegundos() {
 }
 
 function distribuirCartas() {
-  imgCartas.sort(comparador);
-
   let cartas = [];
 
   for (let i = 0; i < numCartas / 2; i++) {
@@ -57,15 +53,16 @@ function distribuirCartas() {
   </div>`);
   }
 
-  cartas.sort(comparador);
-
   function comparador() {
     return Math.random() - 0.5;
   }
+  cartas.sort(comparador);
 
   for (let indice in cartas) {
     mesa.innerHTML += cartas[indice];
   }
+
+  intervalo = setInterval(contarSegundos, 1000);
 }
 
 let numJogadas = 0;
@@ -92,13 +89,13 @@ function compararCartas() {
 
   cartasViradas.shift();
   cartasViradas.shift();
-
   finalizarJogo();
 }
 
 function limparJogo() {
   mesa.innerHTML = "";
   contador = 0;
+  jogarNovamente = "";
 }
 
 let jogarNovamente;
