@@ -9,23 +9,19 @@ const imgCartas = [
 ];
 
 const mesa = document.querySelector(".board");
-let intervalo;
-let contador = 0;
-
 let numCartas;
+let contador = 1;
+let intervalo;
 
 function perguntarNumCartas() {
-  numCartas = parseInt(
-    prompt("Quantas cartas você deseja? (Números pares de 4 a 14)")
-  );
-
-  while (numCartas % 2 != 0 || numCartas < 4 || numCartas > 14) {
+  do {
     numCartas = parseInt(
       prompt("Quantas cartas você deseja? (Números pares de 4 a 14)")
     );
-  }
+  } while (numCartas % 2 != 0 || numCartas < 4 || numCartas > 14);
 
   distribuirCartas();
+  intervalo = setInterval(contarSegundos, 1000);
 }
 
 perguntarNumCartas();
@@ -70,8 +66,6 @@ function distribuirCartas() {
   for (let indice in cartas) {
     mesa.innerHTML += cartas[indice];
   }
-
-  intervalo = setInterval(contarSegundos, 1000);
 }
 
 let numJogadas = 0;
@@ -80,11 +74,9 @@ let cartasViradas = [];
 function virarCarta(carta) {
   numJogadas++;
   carta.classList.add("flip");
-
   cartasViradas.push(carta);
 
   if (cartasViradas[0] && cartasViradas[1]) {
-    console.log(cartasViradas);
     setTimeout(compararCartas, 1000);
   }
 }
